@@ -14,7 +14,9 @@ const sendWelcomeEmail = (email, name) => {
         to: email,
         from: 'lucianpopa84@gmail.com',
         subject: 'Welcome to task manager app',
-        text: `Welcome to the app ${name}. Let me know if it is usefull for you.`
+        text: `Welcome to the app ${name}.
+        
+        Access your tasks at https://lucian-task-manager-app.herokuapp.com/`
     })
 }
 
