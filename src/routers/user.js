@@ -25,7 +25,7 @@ router.post('/users/login', async (req, res) => {
         const user = await User.findByCredentials(req.body.email, req.body.password);
         const token = await user.generateAuthToken();
         res.cookie('session', { user, token }, { maxAge: 7200000, signed: true });
-        res.redirect('/tasks?limit=4');
+        res.redirect('/tasks?limit=10');
     } catch {
         // res.status(400).send();
         res.redirect('/users/login/400');

@@ -14,7 +14,7 @@ router.post('/tasks', auth, async (req, res) => {
     try {
         await task.save();
         // res.status(201).send(task);
-        res.redirect('/tasks?limit=4');
+        res.redirect('/tasks?limit=10');
     } catch (error) {
         res.status(400).send(error);
     }
