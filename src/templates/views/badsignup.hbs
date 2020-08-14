@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/img/todos_icon.png">
+</head>
+<body>
+    <div class="main-content">
+        {{>header}}
+        <h1>Sign up</h1>
+        <form method="POST" action="/users" class="loginForm">
+            <input type="name" name="name" placeholder="type your name" autocomplete="name" required />
+            <input type="email" name="email" placeholder="type your email" autocomplete="email" required />
+            <input type="password" name="password" placeholder="type your password" minlength="6" required />
+            <button type="submit">Sign up</button>
+            <p class="errorMsg">Email already registered, please retry.</p>
+        </form>
+
+        <p>Already have an account? <a href="/users/login">Log in</a></p> 
+
+    </div>
+    {{>footer}}
+    <script type="module" src="/js/client.js"></script>
+</body>
+</html>

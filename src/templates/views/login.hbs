@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / sign up</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/img/todos_icon.png">
+</head>
+<body>
+    <div class="main-content">
+        {{>header}}
+        <h1>Login</h1>
+        <form method="POST" action="/users/login" class="loginForm">
+            <input type="email" name="email" placeholder="type your email" autocomplete="email" required autofocus/>
+            <input type="password" name="password" placeholder="type your password" required />
+            <button type="submit">Login</button>
+            <p class="errorMsg" style="visibility: hidden;">Incorrect username or password, please try again</p>
+        </form>
+
+        <p>Don't have an account? <a href="/users/signup">Sign up</a></p> 
+
+    </div>
+    {{>footer}}
+    <script src="/js/client.js"></script>
+</body>
+</html>

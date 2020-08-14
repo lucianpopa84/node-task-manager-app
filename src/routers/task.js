@@ -13,18 +13,21 @@ router.post('/tasks', auth, async (req, res) => {
 
     try {
         await task.save();
-        res.status(201).send(task);
+        // res.status(201).send(task);
+        res.redirect('/tasks?limit=4');
     } catch (error) {
         res.status(400).send(error);
     }
 });
 
 // GET /tasks?completed=true
-// GET /tasks?limit=10&skip=20
+// GET /tasks?limit=10&skip=10
 // GET /tasks?sortBy=createdAt:desc
 router.get('/tasks', auth, async (req, res) => {
     const match = {};
     const sort = {};
+    const limit = parseInt(req.query.limit);
+    const skip = parseInt(req.query.skip);
 
     if (req.query.completed) {
         match.completed = req.query.completed === 'true';
@@ -40,12 +43,32 @@ router.get('/tasks', auth, async (req, res) => {
             path: 'tasks',
             match,
             options: {
-                limit: parseInt(req.query.limit),
-                skip: parseInt(req.query.skip),
-                sort
+                sort,
+                limit,
+                skip
             }
-        }); 
-        res.send(req.user.tasks); 
+        });
+        
+        // res.send(req.user.tasks);  
+
+        const totalTasks = await Task.countDocuments({ owner: req.user._id });
+
+        const pages = Array.from({ length: Math.ceil(totalTasks / limit) },(v, idx) => {
+            return {
+                num: idx + 1,
+                limit,
+                skip: (limit * (idx + 1)) - limit
+            }
+        });
+        res.render('tasks', {
+            name: 'Lucian Popa',
+            tasks: req.user.tasks,
+            user: req.user,
+            isAuthUser: true,
+            enablePaging: totalTasks > limit,
+            pages,
+            limit
+        });
     } catch (error) {
         res.status(500).send(error);
     }

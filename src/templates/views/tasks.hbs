@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task manager app</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/img/todos_icon.png">
+</head>
+<body>
+    <div class="main-content">
+        {{>header}}
+        <h1>Task manager</h1>
+        <p>{{user.name}}'s tasks.</p>
+        
+        <div class="tasksFilter">
+            Show:
+            <a href="/tasks?limit={{limit}}">
+                all
+            </a>
+            |
+            <a href="/tasks?completed=true&limit={{limit}}">
+                done
+            </a>
+            |
+            <a href="/tasks?completed=false&limit={{limit}}">
+                todo
+            </a>
+        </div>
+
+        <div class="tasksSort">
+            Sort by:
+            <a href="/tasks?sortBy=createdAt:desc&limit={{limit}}">
+                newest first
+            </a>
+            |
+            <a href="/tasks?sortBy=createdAt&limit={{limit}}">
+                oldest first
+            </a>
+            |
+            <a href="/tasks?sortBy=completed:desc&limit={{limit}}">
+                done first
+            </a>
+            |
+            <a href="/tasks?sortBy=completed&limit={{limit}}">
+                todo first
+            </a>
+        </div>
+        
+        <form method="POST" action="/tasks" class="tasksForm">
+            <label>
+                Add task:
+                <input type="text" name="description" placeholder="task description..." />
+            </label>
+            <button type="submit">
+                Add
+            </button>
+        </form>
+
+        {{#if tasks.length}}
+
+        {{#if enablePaging}}
+        <div class="tasksPaging">
+            Pages:
+            {{#each pages}}
+            <a href="/tasks?limit={{limit}}&skip={{skip}}">
+                {{num}}
+            </a>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <ul id="taskList">
+            {{#each tasks}}
+                <li>
+                    <input type="checkbox" {{#if completed }} checked="checked" {{/if}} onclick="toggleTask('{{ _id }}', {{ completed }})">
+                    <input type="text" value="{{ description }}" onchange="updateTask('{{ _id }}', this)">
+                    <button onclick="deleteTask('{{ _id }}')" class="deleteBtn">
+                        x
+                    </button>
+                </li>
+            {{/each}}
+        </ul>
+
+        {{else}}
+        <p>You have no tasks.</p>
+        {{/if}}
+
+    </div>
+    {{>footer}}
+    <script src="/js/client.js"></script>
+</body>
+</html>
