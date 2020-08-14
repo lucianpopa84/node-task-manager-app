@@ -15,10 +15,6 @@ body {
     flex-grow: 1;
 }
 
-.main-content p, .main-content form {
-    margin-right: 16px;
-}
-
 header {
     margin-top: 16px;
     margin-bottom: 36px;
@@ -59,7 +55,6 @@ li button {
     border: 1px solid #888888;
     background: mistyrose;
     color: #333333;
-    margin-bottom: 8px;
     margin-left: 8px;
 }
 
@@ -73,7 +68,13 @@ button.deleteBtn {
 }
 
 #taskList input[type="text"] {
+    padding: 8px;
+    width: 40%; 
     border: none;
+}
+#taskList li {
+    display: flex;
+    align-items: center;
 }
 
 input[type="checkbox"] {
@@ -83,22 +84,21 @@ input[type="checkbox"] {
 
 .tasksForm {
     margin: 20px 0;
-    display: flex;
-    align-items: flex-end;
 }
 
 .tasksForm input, .loginForm input {
     border: 1px solid #cccccc;
     padding: 8px;
     margin-bottom: 8px;
+    min-width: 40%;
 }
 
 .tasksFilter, .tasksSort {
     margin: 16px 0 
 }
 
-.tasksFilter > a, .tasksSort > a, .tasksPaging a {
-    margin: 16px 16px;
+.tasksFilter > a, .tasksSort > a, .tasksPaging a, p > a {
+    margin: 8px 8px;
     color: #888888;
     text-decoration: none;
 }

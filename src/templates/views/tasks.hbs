@@ -50,8 +50,8 @@
         <form method="POST" action="/tasks" class="tasksForm">
             <label>
                 Add task:
-                <input type="text" name="description" placeholder="task description..." />
             </label>
+            <input type="text" name="description" placeholder="task description..." />
             <button type="submit">
                 Add
             </button>
@@ -74,7 +74,7 @@
             {{#each tasks}}
                 <li>
                     <input type="checkbox" {{#if completed }} checked="checked" {{/if}} onclick="toggleTask('{{ _id }}', {{ completed }})">
-                    <input type="text" value="{{ description }}" onchange="updateTask('{{ _id }}', this)">
+                    <input type="text" value="{{ description }}" style="min-width: {{description.length}}ch;" onchange="updateTask('{{ _id }}', this)">
                     <button onclick="deleteTask('{{ _id }}')" class="deleteBtn">
                         x
                     </button>
