@@ -4,10 +4,10 @@ const hbs = require('hbs');
 require('./templates/helpers/minwidth'); // import handelbars helpers
 const cookieParser = require('cookie-parser');
 require('./db/mongoose'); // connect to mongodb database
-// api
+// api routes
 const userRouter = require('./routers/user');
 const taskRouter = require('./routers/task');
-// templates
+// hbs template routes
 const tasksRouter = require('./routers/render/tasks');
 const aboutRouter = require('./routers/render/about');
 const loginRouter = require('./routers/render/login');

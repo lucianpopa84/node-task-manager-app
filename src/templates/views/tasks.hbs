@@ -15,34 +15,34 @@
         
         <div class="tasksFilter">
             Show:
-            <a href="/tasks?limit={{limit}}">
+            <a href="/tasks?limit={{limit}}&skip={{skip}}">
                 all
             </a>
             |
-            <a href="/tasks?completed=true&limit={{limit}}">
+            <a href="/tasks?completed=true&limit={{limit}}&skip={{skip}}">
                 done
             </a>
             |
-            <a href="/tasks?completed=false&limit={{limit}}">
+            <a href="/tasks?completed=false&limit={{limit}}&skip={{skip}}">
                 todo
             </a>
         </div>
 
         <div class="tasksSort">
             Sort by:
-            <a href="/tasks?sortBy=createdAt:desc&limit={{limit}}">
+            <a href="/tasks?sortBy=createdAt:desc&limit={{limit}}&skip={{skip}}">
                 newest first
             </a>
             |
-            <a href="/tasks?sortBy=createdAt&limit={{limit}}">
+            <a href="/tasks?sortBy=createdAt&limit={{limit}}&skip={{skip}}">
                 oldest first
             </a>
             |
-            <a href="/tasks?sortBy=completed:desc&limit={{limit}}">
+            <a href="/tasks?sortBy=completed:desc&limit={{limit}}&skip={{skip}}">
                 done first
             </a>
             |
-            <a href="/tasks?sortBy=completed&limit={{limit}}">
+            <a href="/tasks?sortBy=completed&limit={{limit}}&skip={{skip}}">
                 todo first
             </a>
         </div>
@@ -59,6 +59,18 @@
 
         {{#if tasks.length}}
 
+        <ul id="taskList">
+            {{#each tasks}}
+            <li>
+                <input type="checkbox" {{#if completed }} checked="checked" {{/if}} onclick="toggleTask('{{ _id }}', {{ completed }})">
+                <input type="text" value="{{ description }}" style="min-width: {{minwidth description.length}}ch;" onchange="updateTask('{{ _id }}', this)">
+                <button onclick="deleteTask('{{ _id }}')" class="deleteBtn">
+                    x
+                </button>
+            </li>
+            {{/each}}
+        </ul>
+
         {{#if enablePaging}}
         <div class="tasksPaging">
             Pages:
@@ -69,18 +81,6 @@
             {{/each}}
         </div>
         {{/if}}
-
-        <ul id="taskList">
-            {{#each tasks}}
-                <li>
-                    <input type="checkbox" {{#if completed }} checked="checked" {{/if}} onclick="toggleTask('{{ _id }}', {{ completed }})">
-                    <input type="text" value="{{ description }}" style="min-width: {{minwidth description.length}}ch;" onchange="updateTask('{{ _id }}', this)">
-                    <button onclick="deleteTask('{{ _id }}')" class="deleteBtn">
-                        x
-                    </button>
-                </li>
-            {{/each}}
-        </ul>
 
         {{else}}
         <p>You have no tasks.</p>

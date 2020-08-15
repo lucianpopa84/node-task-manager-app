@@ -17,8 +17,8 @@ const auth = async (req, res, next) => {
         next();
 
     } catch (error) {
-        res.status(401).send({ error: 'Please authenticate.'});
-        // res.redirect('/users/login');
+        // res.status(401).send({ error: 'Please authenticate.'});
+        res.redirect('/users/login');
     }
 }
 

@@ -3,6 +3,7 @@ const redirectHome = (req, res, next) => {
     if (req.signedCookies.session) {
         return res.redirect('/tasks?limit=10');
     }
+    
     next();
 }
 
