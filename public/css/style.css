@@ -69,7 +69,6 @@ button.deleteBtn {
 
 #taskList input[type="text"] {
     padding: 8px;
-    width: 40%; 
     border: none;
 }
 #taskList li {

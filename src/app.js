@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
-require('./templates/helpers/not'); // import handelbars helpers
+require('./templates/helpers/minwidth'); // import handelbars helpers
 const cookieParser = require('cookie-parser');
 require('./db/mongoose'); // connect to mongodb database
 // api
